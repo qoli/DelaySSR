@@ -46,6 +46,6 @@ delay-config.py 會根據傳入<u>伺服器名稱</u>從 LogDelay_ssr_list.txt �
 
 最終查看 LogDelay_Google.txt 和 LogDelay_working_sort.txt 兩個結果文件即可。
 
-![image-20180718174642567](/Users/qoli/GitHub/DelaySSR/readme/image-20180718174642567.png)
+![image-20180718174642567](./readme/image-20180718174642567.png)
 
-![image-20180718175012775](/Users/qoli/GitHub/DelaySSR/readme/image-20180718175012775.png)
+![image-20180718175012775](./readme/image-20180718175012775.png)
