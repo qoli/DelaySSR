@@ -35,3 +35,17 @@ delay-test.sh 會根據 LogDelay_working_sort 結果文件，測試頭 N 個伺�
 `delay-config.py 伺服器名稱`
 
 delay-config.py 會根據傳入<u>伺服器名稱</u>從 LogDelay_ssr_list.txt 結果文件輸出 config.json 配置文本。
+
+
+
+## 命令使用
+
+`delay-ping.sh SSR訂閱地址`
+
+將會生成如圖的測試結果，耐心等待執行完畢。將會自動調用 `./delay-test.sh 10` 測試延遲最低的 10 個伺服器。
+
+最終查看 LogDelay_Google.txt 和 LogDelay_working_sort.txt 兩個結果文件即可。
+
+![image-20180718174642567](/Users/qoli/GitHub/DelaySSR/readme/image-20180718174642567.png)
+
+![image-20180718175012775](/Users/qoli/GitHub/DelaySSR/readme/image-20180718175012775.png)
