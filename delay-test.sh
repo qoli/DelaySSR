@@ -1,13 +1,10 @@
 #!/bin/bash
 clear
-echo '> '$(pwd)
 RUN_Log="./run-local.log"
-CONF="./LogDelay_subscribe_link.txt"
-CONF_decode="./LogDelay_subscribe_link_decode.txt"
 CONF_ssr="./LogDelay_ssr_list.txt"
-PING_log="./LogDelay_working_log.txt"
 PING_sort="./LogDelay_working_sort.txt"
-SSR_config="./delay-config.py "
+PING_google="./LogDelay_Google.txt"
+SSR_ConfigBuild="./delay-config.py "
 
 if [ ! -n "$1" ]; then
 	echo "usage:"
@@ -19,6 +16,7 @@ NUMBER=0
 clear
 
 echo "Google Delay" | tee $PING_google
+echo '> '$(pwd)
 cat ${PING_sort} | while read Line
 do
 	if [ $NUMBER == $1 ]; then
@@ -29,7 +27,7 @@ do
 	echo ""
 	echo "---"
 	echo "# "$NUMBER" / "$Line | tee -a $PING_google
-	$SSR_config $CONF_ssr $SSRP2 > ./run-local.json
+	$SSR_ConfigBuild $CONF_ssr $SSRP2 > ./run-local.json
 	nohup ./ss-local -c ./run-local.json > $RUN_Log &
 	sleep 3
 	PID=$(ps -ef | grep ss-local | awk 'NR==1{print $2}')
