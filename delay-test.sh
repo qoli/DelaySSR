@@ -34,7 +34,7 @@ do
 	echo "PID: "$PID
 	ps -ef | grep ss-local | awk 'NR==1'
 	# cat ./run-local.json
-	google=$(curl -o /dev/null -s -w %{time_total} --connect-timeout 2 --max-time 5 --socks5 127.0.0.1:2014 http://www.google.com/generate_204)
+	google=$(curl -o /dev/null -s -w %{time_total} --connect-timeout 2 --max-time 5 --socks5 127.0.0.1:3333 http://www.google.com/generate_204)
 	miui=$(curl -o /dev/null -s -w %{time_total} --connect-timeout 2 http://connect.rom.miui.com/generate_204)
 	echo "Delay, Google: "$google" / MIUI:"$miui | tee -a $PING_google
 	sleep 1

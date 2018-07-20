@@ -50,10 +50,10 @@ for thisLine in lines:
 		"protocol" : base[2],
 		"server" : base[0],
 		"password" : decode_base64(base[5]),
-		"local_address" : "127.0.0.1",
+		"local_address" : "0.0.0.0",
 		"server_port" : 443,
 		"timeout" : 60,
-		"local_port" : 2014,
+		"local_port" : 3333,
 		"obfs_param": decode_base64(query['obfsparam']),
 		"obfs" : base[4],
 		}
