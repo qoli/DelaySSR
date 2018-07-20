@@ -4,11 +4,11 @@ RUN_Log="./run-local.log"
 CONF_ssr="./LogDelay_ssr_list.txt"
 PING_sort="./LogDelay_working_sort.txt"
 PING_google="./LogDelay_Google.txt"
-SSR_ConfigBuild="./delay-config.py "
+SSR_ConfigBuild="python2.7 ./delay-config.py"
 
 if [ ! -n "$1" ]; then
 	echo "usage:"
-	echo "	$0 count(int)"
+	echo "	$0 count(int) or ssr://"
 	exit
 fi
 
@@ -33,7 +33,7 @@ do
 	PID=$(ps -ef | grep ss-local | awk 'NR==1{print $2}')
 	echo "PID: "$PID
 	ps -ef | grep ss-local | awk 'NR==1'
-	# cat -n ./ss-local.log
+	# cat ./run-local.json
 	google=$(curl -o /dev/null -s -w %{time_total} --connect-timeout 2 --max-time 5 --socks5 127.0.0.1:2014 http://www.google.com/generate_204)
 	miui=$(curl -o /dev/null -s -w %{time_total} --connect-timeout 2 http://connect.rom.miui.com/generate_204)
 	echo "Delay, Google: "$google" / MIUI:"$miui | tee -a $PING_google

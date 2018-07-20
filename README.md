@@ -3,12 +3,24 @@
 
 
 
+## 更新記錄
+
+##### 2018年07月21日
+
+* 追加單獨 SSR:// 測試支持
+* 追加多個 SSR 測試支持（命令行）
+* test 文件使用 `python2.7 ./delay-config.py` 調用腳本
+
+##### 2018年07月21日之前
+
+發佈初始版本
+
+
+
 ## 系統要求
 
 - [x] Mac OS
 - [x] Python 2.7
-
-
 
 
 
@@ -27,6 +39,10 @@
 `delay-ping.sh ssr訂閱地址`
 
 delay-ping.sh 會從 SSR 訂閱地址下載并測試 Ping 延遲并輸出排序結果文件 LogDelay_working_sort。
+
+`delay-ping.sh ssr-ssr`
+
+delay-ping.sh 測試多個 SSR://，使用「-」中橫線分割。
 
 `delay-test.sh 測試頭 N 個伺服器`
 

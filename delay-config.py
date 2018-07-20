@@ -37,6 +37,13 @@ for thisLine in lines:
 	base = conf[0].split(":")
 	query = qs(urlparse(conf[1]).query)
 
+	if "protoparam" not in query:
+		query['protoparam'] = ""
+		pass
+	if "obfsparam" not in query:
+		query['obfsparam'] = ""
+		pass
+
 	json={
 		"protocol_param": decode_base64(query['protoparam']),
 		"method": base[3],
@@ -53,7 +60,6 @@ for thisLine in lines:
 
 	js = dumps(json, sort_keys=True, indent=4, separators=(',', ':'))
 	if sys.argv[2] == "all":
-		
 		print(js)
 	else:
 		if sys.argv[2] == base[0]: print(js)
