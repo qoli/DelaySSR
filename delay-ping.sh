@@ -9,12 +9,13 @@ PING_log="./LogDelay_working_log.txt"
 PING_sort="./LogDelay_working_sort.txt"
 
 ping_test() {
-	Config_ip=$(echo $1| cut -c 7-2000 | openssl base64 -d | awk -F ":" '{print $1}')
+	Config_ip=$(echo $1| cut -c 7-2000 | base64 --decode | awk -F ":" '{print $1}')
 	DELAY=$(ping -t 3 ${Config_ip} | grep "min/avg/max/stddev" | awk '{print $4}' | cut -d "/" -f 2)
+	# echo $1| cut -c 7-2000
 	if [ ! -n "$DELAY" ]; then
 		echo "> "$NUMBER"/"${Config_ip}"/timeout"
 	else
-		echo $(echo $1 | cut -c 7-2000 | openssl base64 -d)"" >> ${CONF_ssr}
+		echo $(echo $1 | cut -c 7-2000 | base64 --decode)"" >> ${CONF_ssr}
 		echo "> "$NUMBER"/"${Config_ip}"/avg(ms)/"${DELAY} | tee -a ${PING_log}
 	fi
 }
@@ -23,7 +24,7 @@ if [ ! -n "$1" ]; then
 	echo "usage:"
 	echo "	$0 subscribe_link"
 	echo "	$0 ssr://"
-	echo "	$0 ssr://-ssr://"
+	echo "	$0 ssr:// ssr://"
 	exit
 fi
 
@@ -40,7 +41,7 @@ if [ $determine == "ssr:" ]; then
 	# SSR Mode
 	echo "ssr: mode..."
 	# ping_test $1
-	IFS=-
+	IFS=" "
 	arr=($1)
 	for s in ${arr[@]}
 	do
@@ -56,7 +57,7 @@ else
 	rm ${CONF}
 fi
 
-cat $CONF_decode | while read Line
+for Line in `cat ${CONF_decode}`
 do
 	NUMBER=$(expr $NUMBER + 1)
 	ping_test $Line
