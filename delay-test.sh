@@ -26,8 +26,9 @@ do
 	SSRP2=$(echo $Line | cut -d "/" -f 2)
 	echo ""
 	echo "---"
-	echo "# "$NUMBER" / "$Line | tee -a $PING_google
-	$SSR_ConfigBuild $CONF_ssr $SSRP2 > ./run-local.json
+	NAME=$($SSR_ConfigBuild $CONF_ssr "name" $SSRP2 | base64 --decode)
+	echo "# "$NUMBER" / "$NAME" "$Line | tee -a $PING_google
+	$SSR_ConfigBuild $CONF_ssr "json" $SSRP2 > ./run-local.json
 	nohup ./ss-local -c ./run-local.json > $RUN_Log &
 	sleep 3
 	PID=$(ps -ef | grep ss-local | awk 'NR==1{print $2}')

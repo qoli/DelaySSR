@@ -1,4 +1,6 @@
 #! /usr/bin/env python
+#coding=utf-8
+
 import sys
 import base64
 from json import dumps
@@ -25,8 +27,9 @@ def decode_base64(data):
 if len(sys.argv) < 2:
 	print(sys.version)
 	print("usage:")
-	print("	"+sys.argv[0]+" all			all")
-	print("	"+sys.argv[0]+" server name		one config")
+	print("	"+sys.argv[0]+" (logFile) (all) ")
+	print("	"+sys.argv[0]+" (logFile) (serverName) (json)")
+	print("	"+sys.argv[0]+" (logFile) (serverName) (name)")
 	exit();
 
 with open(sys.argv[1]) as f:
@@ -36,6 +39,8 @@ for thisLine in lines:
 	conf = thisLine.strip().split("/")
 	base = conf[0].split(":")
 	query = qs(urlparse(conf[1]).query)
+
+	# print(query)
 
 	if "protoparam" not in query:
 		query['protoparam'] = ""
@@ -59,7 +64,13 @@ for thisLine in lines:
 		}
 
 	js = dumps(json, sort_keys=True, indent=4, separators=(',', ':'))
+
 	if sys.argv[2] == "all":
 		print(js)
-	else:
-		if sys.argv[2] == base[0]: print(js)
+
+	if sys.argv[2] == "json":
+		if sys.argv[3] == base[0]: print(js)
+
+	if sys.argv[2] == "name":
+		name = query['remarks'].replace('-','+')
+		if sys.argv[3] == base[0]: print(name)

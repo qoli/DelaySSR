@@ -30,6 +30,7 @@ fi
 
 determine=$(echo $1|cut -c 1-4)
 
+rm ${CONF}
 rm ${CONF_decode}
 rm ${CONF_ssr}
 rm ${PING_log}
@@ -54,7 +55,6 @@ else
 	echo "subscribe link mode..."
 	wget -c $1 -O ${CONF}
 	base64 --decode ${CONF} > ${CONF_decode}
-	rm ${CONF}
 fi
 
 for Line in `cat ${CONF_decode}`
